@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
 
-  <link href="css/styles.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,26 +26,25 @@
 
   <br><br>
 
-  <main>
-    <div id="content">
-      <!-- Paste your Google Form iframe code here -->
-      <iframe
-        src="PASTE_YOUR_GOOGLE_FORM_EMBED_LINK_HERE"
-        width="760"
-        height="900"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0">
-        Loading…
-      </iframe>
-    </div>
-  </main>
+<main>
+  <div id="content">
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSf2h6BRDwYuDNZorHAvILq_FZ5Eb_3KjjatU_A6voPE0M8Xow/viewform?usp=publish-editor" 
+      width="640" 
+      height="647" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0">
+      Loading…
+    </iframe>
+  </div>
+</main>
 
   <footer>
     CST336 Internet Programming. 2026&copy; Husain <br>
     <strong>Disclaimer:</strong> The information in this webpage is fictitious. <br><br>
 
-    <img src="img/csumb_logo.jpg" alt="CSUMB Logo" id="csumb-logo">
+    <img src="csumb_logo.jpg" alt="CSUMB Logo" id="csumb-logo">
   </footer>
 </body>
 </html>
