@@ -1,8 +1,14 @@
-/* Reset */
+/* =========================
+   RESET
+========================= */
 * {
   box-sizing: border-box;
 }
 
+
+/* =========================
+   BODY
+========================= */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -11,7 +17,10 @@ body {
   color: #2f4f4f;
 }
 
-/* Header */
+
+/* =========================
+   HEADER
+========================= */
 .site-header {
   padding: 30px 20px;
   text-align: center;
@@ -25,13 +34,17 @@ body {
   opacity: 0.9;
 }
 
-/* Navigation */
+
+/* =========================
+   NAVIGATION
+========================= */
 .site-nav {
-  display: flex;              /* required property */
-  gap: 16px;
+  display: flex;
   justify-content: center;
+  gap: 16px;
   padding: 14px;
   background: #bde0fe;
+  flex-wrap: wrap;
 }
 
 .site-nav a {
@@ -40,8 +53,9 @@ body {
   padding: 8px 14px;
   border-radius: 20px;
   background: #e0fbfc;
-  transition: 0.3s ease;
   font-weight: 500;
+  border: 1px solid transparent;
+  transition: 0.3s ease;
 }
 
 .site-nav a:hover {
@@ -53,20 +67,26 @@ body {
   background: #81d8d0;
 }
 
-/* Main container */
+
+/* =========================
+   MAIN CONTAINER
+========================= */
 .container {
   max-width: 950px;
   margin: 30px auto;
   padding: 20px;
 }
 
-/* Cards */
+
+/* =========================
+   CARD SECTIONS
+========================= */
 .card {
   background: #ffffff;
   padding: 20px;
   margin: 20px 0;
   border-radius: 15px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);  /* required property */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   transition: 0.3s ease;
 }
 
@@ -74,7 +94,10 @@ body {
   transform: translateY(-4px);
 }
 
-/* Two-column layout */
+
+/* =========================
+   TWO COLUMN LAYOUT
+========================= */
 .two-col {
   display: flex;
   gap: 20px;
@@ -85,7 +108,10 @@ body {
   flex: 1 1 300px;
 }
 
-/* Headings */
+
+/* =========================
+   HEADINGS
+========================= */
 h1 {
   margin-bottom: 5px;
 }
@@ -98,13 +124,44 @@ h3 {
   color: #3a86ff;
 }
 
-/* Lists */
+
+/* =========================
+   LIST SPACING
+========================= */
 ul li,
 ol li {
   margin-bottom: 6px;
 }
 
-/* Footer */
+
+/* =========================
+   IMAGES & FIGURES
+========================= */
+figure {
+  margin: 0;
+}
+
+figure img {
+  width: 100%;
+  max-width: 700px;     /* Prevents overly large images */
+  height: auto;         /* Keeps correct proportions */
+  display: block;
+  margin: 15px auto;    /* Centers image */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+figcaption {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  text-align: center;
+  color: rgba(27, 58, 75, 0.85);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 .site-footer {
   text-align: center;
   padding: 18px;
@@ -112,4 +169,20 @@ ol li {
   color: #1b3a4b;
   margin-top: 30px;
   font-weight: 500;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 700px) {
+  .two-col {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  figure img {
+    max-width: 95%;
+  }
 }
