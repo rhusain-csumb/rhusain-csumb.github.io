@@ -1,0 +1,113 @@
+body {
+  background-color: black;
+  color: gray;
+}
+
+/* Center content in semantic containers */
+header, nav, main, footer {
+  text-align: center;
+}
+
+/* Navigation menu links */
+nav a {
+  padding: 15px;
+  padding-bottom: 4px;
+  font-size: 1.8em;
+  text-decoration: none;   /* removes underline */
+  color: white;            /* by default, links are blue */
+}
+
+/* Hover pseudo-class */
+nav a:hover {
+  border-bottom: 2px orange solid;
+  font-size: 2em;
+  transition: .2s;         /* transition effect */
+}
+
+/* Make current page stand out */
+#current {
+  color: orange;
+  border-bottom: 2px orange solid;
+}
+
+/* Put image + blurb side-by-side (Flexbox) */
+main {
+  display: flex;
+  justify-content: center;     /* or space-evenly */
+  align-items: center;
+  gap: 25px;
+}
+
+/* Image sizing */
+main img {
+  width: 250px;
+  height: auto;
+}
+
+/* Footer styling */
+footer {
+  font-size: 0.9em;
+  color: #b0b0b0;
+  margin-top: 30px;
+}
+
+#csumb-logo {
+  width: 200px;
+  height: auto;
+  margin-top: 10px;
+}
+
+/* ===== About page table styling ===== */
+table {
+  margin: 0 auto;         /* centers table block element */
+}
+
+td {
+  padding-right: 10px;
+  font-size: 1.3em;
+}
+
+td strong {
+  color: orange;
+}
+
+/* Style header row (id) and data rows (class) */
+#table-header {
+  background-color: #351a00;
+}
+
+.table-row {
+  background-color: #753900;
+}
+
+/* ===== About page list styling ===== */
+ul {
+  width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Hobby nouns (span) */
+.hobby {
+  color: orange;
+  font-weight: bold;
+}
+
+/* ===== Online font (Lesson 7) ===== */
+body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500; /* choose 300-800 */
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+footer {
+  font-size: 0.8em;
+  color: #bbbbbb;
+}
