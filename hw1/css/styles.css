@@ -1,14 +1,14 @@
-/* =========================
+/* ========================================
    RESET
-========================= */
+======================================== */
 * {
   box-sizing: border-box;
 }
 
 
-/* =========================
+/* ========================================
    BODY
-========================= */
+======================================== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -18,9 +18,9 @@ body {
 }
 
 
-/* =========================
+/* ========================================
    HEADER
-========================= */
+======================================== */
 .site-header {
   padding: 30px 20px;
   text-align: center;
@@ -35,9 +35,9 @@ body {
 }
 
 
-/* =========================
+/* ========================================
    NAVIGATION
-========================= */
+======================================== */
 .site-nav {
   display: flex;
   justify-content: center;
@@ -55,7 +55,7 @@ body {
   background: #e0fbfc;
   font-weight: 500;
   border: 1px solid transparent;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .site-nav a:hover {
@@ -68,9 +68,9 @@ body {
 }
 
 
-/* =========================
+/* ========================================
    MAIN CONTAINER
-========================= */
+======================================== */
 .container {
   max-width: 950px;
   margin: 30px auto;
@@ -78,26 +78,27 @@ body {
 }
 
 
-/* =========================
+/* ========================================
    CARD SECTIONS
-========================= */
+======================================== */
 .card {
   background: #ffffff;
   padding: 20px;
   margin: 20px 0;
   border-radius: 15px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  transition: 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
 
-/* =========================
+/* ========================================
    TWO COLUMN LAYOUT
-========================= */
+======================================== */
 .two-col {
   display: flex;
   gap: 20px;
@@ -109,9 +110,9 @@ body {
 }
 
 
-/* =========================
+/* ========================================
    HEADINGS
-========================= */
+======================================== */
 h1 {
   margin-bottom: 5px;
 }
@@ -125,43 +126,53 @@ h3 {
 }
 
 
-/* =========================
+/* ========================================
    LIST SPACING
-========================= */
+======================================== */
 ul li,
 ol li {
   margin-bottom: 6px;
 }
 
 
-/* =========================
+/* ========================================
    IMAGES & FIGURES
-========================= */
+======================================== */
 figure {
-  margin: 0;
+  margin: 25px 0;
+  text-align: center;
 }
 
 figure img {
   width: 100%;
-  max-width: 700px;     /* Prevents overly large images */
-  height: auto;         /* Keeps correct proportions */
+  max-width: 650px;      /* Keeps diagrams clean and balanced */
+  height: auto;          /* Maintains correct proportions */
   display: block;
-  margin: 15px auto;    /* Centers image */
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+/* Subtle hover effect */
+figure img:hover {
+  transform: scale(1.02);
 }
 
 figcaption {
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 0.95rem;
   text-align: center;
   color: rgba(27, 58, 75, 0.85);
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
-/* =========================
+/* ========================================
    FOOTER
-========================= */
+======================================== */
 .site-footer {
   text-align: center;
   padding: 18px;
@@ -172,9 +183,9 @@ figcaption {
 }
 
 
-/* =========================
+/* ========================================
    RESPONSIVE DESIGN
-========================= */
+======================================== */
 @media (max-width: 700px) {
   .two-col {
     flex-direction: column;
