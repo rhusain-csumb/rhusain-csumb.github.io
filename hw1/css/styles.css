@@ -145,8 +145,8 @@ figure {
 
 figure img {
   width: 100%;
-  max-width: 650px;      /* Keeps diagrams clean and balanced */
-  height: auto;          /* Maintains correct proportions */
+  max-width: 650px;
+  height: auto;
   display: block;
   margin: 0 auto;
   border-radius: 10px;
@@ -154,7 +154,6 @@ figure img {
   transition: transform 0.3s ease;
 }
 
-/* Subtle hover effect */
 figure img:hover {
   transform: scale(1.02);
 }
