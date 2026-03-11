@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rasna Husain: About</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
+
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Rasna Husain</h1>
+    <hr>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a id="current" href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <br><br>
+
+  <div id="content">
+    <table>
+      <tr id="table-header">
+        <td><strong>Programming Language</strong></td>
+        <td><strong>Years Experience</strong></td>
+      </tr>
+
+      <tr class="table-row">
+        <td>Java</td>
+        <td>3</td>
+      </tr>
+
+      <tr class="table-row">
+        <td>C++</td>
+        <td>2</td>
+      </tr>
+
+      <tr class="table-row">
+        <td>PHP</td>
+        <td>1</td>
+      </tr>
+    </table>
+
+    <br><br>
+
+    <ul>
+      <li><span class="hobby">Video games</span>: I enjoy console and strategy games.</li>
+      <li><span class="hobby">Soccer</span>: I like playing and watching games.</li>
+      <li><span class="hobby">Music</span>: I listen while studying and relaxing.</li>
+      <li><span class="hobby">Programming</span>: I enjoy learning new tools.</li>
+    </ul>
+  </div>
+
+  <footer>
+    CST336 Internet Programming. 2026&copy; Husain <br>
+    <strong>Disclaimer:</strong> The information in this webpage is fictitious. <br><br>
+
+    <img src="img/csumb_logo.jpg" alt="CSUMB Logo" id="csumb-logo">
+  </footer>
+</body>
+</html>
