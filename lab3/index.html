@@ -1,206 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US Geography Quiz - CST438</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f8f9fa; padding-top: 50px; }
-        .quiz-container { max-width: 800px; margin: auto; }
-        .feedback-img { width: 25px; height: 25px; margin-left: 10px; display: none; }
-        .q-feedback { font-weight: bold; margin-top: 5px; }
-        .correct-text { color: #198754; display: none; }
-        .incorrect-text { color: #dc3545; display: none; }
-        .q-card { margin-bottom: 20px; transition: transform 0.2s; }
-        .q-card:hover { transform: scale(1.01); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>US Geography Quiz</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.13.2/underscore-umd-min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
 
-<div class="container quiz-container mb-5">
-    <div class="card shadow">
-        <div class="card-header bg-dark text-white text-center">
-            <h1>US Geography Quiz</h1>
-            <p id="timesTakenDisplay" class="mb-0">Total Times Taken: 0</p>
-        </div>
-        
-        <div class="card-body">
-            <form id="quizForm">
-                <div class="card q-card border-light shadow-sm p-3">
-                    <p class="h5">1. Which state is known as the "Grand Canyon State"?</p>
-                    <div id="q1Choices">
-                        </div>
-                    <div id="feedback1" class="q-feedback">
-                        <span class="correct-text">Correct!</span>
-                        <span class="incorrect-text">Incorrect. (Arizona)</span>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Symbol_check_vote.svg" class="feedback-img" id="img1-c">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/X_mark.svg" class="feedback-img" id="img1-i">
-                    </div>
-                </div>
+<body class="text-center">
 
-                <div class="card q-card border-light shadow-sm p-3">
-                    <p class="h5">2. Is the Mississippi River the longest river in the US?</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="q2" id="q2y" value="No">
-                        <label class="form-check-label" for="q2y">No (Missouri River is longest)</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="q2" id="q2n" value="Yes">
-                        <label class="form-check-label" for="q2n">Yes</label>
-                    </div>
-                    <div id="feedback2" class="q-feedback">
-                        <span class="correct-text">Correct!</span>
-                        <span class="incorrect-text">Incorrect.</span>
-                    </div>
-                </div>
+<header class="quiz-header">
+    <h1 class="p-5 bg-info text-white">US Geography Quiz</h1>
+    <span id="totalAttempts" class="badge bg-dark mt-2">Total Attempts: 0</span>
+</header>
 
-                <div class="card q-card border-light shadow-sm p-3">
-                    <label for="q6" class="h5">6. Select the "Sunshine State" from the list:</label>
-                    <select class="form-select w-50" id="q6">
-                        <option value="">Choose...</option>
-                        <option value="Florida">Florida</option>
-                        <option value="California">California</option>
-                        <option value="Texas">Texas</option>
-                    </select>
-                </div>
+<main class="container mt-5">
 
-                <div class="card q-card border-light shadow-sm p-3">
-                    <label for="q7" class="h5">7. Type the name of the smallest US State:</label>
-                    <input type="text" class="form-control w-50" id="q7" placeholder="State Name">
-                </div>
-
-                <div class="card q-card border-light shadow-sm p-3">
-                    <label for="q8" class="h5">8. How many Great Lakes are there?</label>
-                    <input type="number" class="form-control w-25" id="q8">
-                </div>
-
-                <div class="card q-card border-light shadow-sm p-3">
-                    <p class="h5">9. Which of these are West Coast states? (Select all that apply)</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="q9a" value="Oregon">
-                        <label class="form-check-label" for="q9a">Oregon</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="q9b" value="Washington">
-                        <label class="form-check-label" for="q9b">Washington</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="q9c" value="New York">
-                        <label class="form-check-label" for="q9c">New York</label>
-                    </div>
-                </div>
-
-                <div class="card q-card border-light shadow-sm p-3">
-                    <label for="q10" class="h5">10. On a scale of 1-10, how many states border the Gulf of Mexico?</label>
-                    <input type="range" class="form-range" min="1" max="10" id="q10" oninput="rangeVal.innerText = this.value">
-                    <p>Value: <span id="rangeVal">5</span></p>
-                </div>
-
-                <div class="text-center mt-4">
-                    <button type="button" class="btn btn-primary btn-lg px-5" onclick="gradeQuiz()">Submit Quiz</button>
-                    <button type="reset" class="btn btn-outline-secondary btn-lg ms-2" onclick="location.reload()">Reset</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="card-footer bg-light text-center py-4">
-            <h2 id="finalScoreDisplay">Total Score: 0/100</h2>
-            <div id="congrats" class="alert alert-success d-none mt-3">
-                <h3>🌟 Geography Expert! 🌟</h3>
-                <p>You scored above 80%!</p>
-            </div>
-        </div>
-    </div>
+<!-- Q1 -->
+<div class="quiz-card">
+    <h3><span id="markImg1"></span> What is the capital of California?</h3>
+    <input type="text" id="q1" class="form-control custom-input">
+    <div id="q1Feedback" class="feedback-msg"></div>
 </div>
 
-<script>
-    // 1. Web Storage: Track times taken
-    window.onload = function() {
-        let attempts = localStorage.getItem("geoQuizAttempts") || 0;
-        document.getElementById("timesTakenDisplay").innerText = "Total Times Taken: " + attempts;
-        setupRandomizedChoices();
-    };
+<!-- Q2 -->
+<div class="quiz-card">
+    <h3><span id="markImg2"></span> What is the longest river?</h3>
+    <select id="q2" class="form-select custom-input">
+        <option value="">Select One</option>
+        <option value="mississippi">Mississippi</option>
+        <option value="missouri">Missouri</option>
+        <option value="colorado">Colorado</option>
+        <option value="delaware">Delaware</option>
+    </select>
+    <div id="q2Feedback" class="feedback-msg"></div>
+</div>
 
-    // 2. Randomize Choices (Rubric Requirement)
-    function setupRandomizedChoices() {
-        const choices = [
-            { id: 'q1a', val: 'Arizona', label: 'Arizona' },
-            { id: 'q1b', val: 'Nevada', label: 'Nevada' },
-            { id: 'q1c', val: 'Utah', label: 'Utah' }
-        ];
-        // Simple Shuffle
-        choices.sort(() => Math.random() - 0.5);
-        
-        let container = document.getElementById("q1Choices");
-        choices.forEach(c => {
-            container.innerHTML += `
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="q1" id="${c.id}" value="${c.val}">
-                    <label class="form-check-label" for="${c.id}">${c.label}</label>
-                </div>`;
-        });
-    }
+<!-- Q3 -->
+<div class="quiz-card">
+    <h3><span id="markImg3"></span> What presidents are carved into mount Rushmore?</h3>
 
-    function gradeQuiz() {
-        let score = 0;
-        
-        // --- Question Validation Logic ---
-        
-        // Q1 (Radio)
-        const q1 = document.querySelector('input[name="q1"]:checked');
-        if (q1 && q1.value === "Arizona") {
-            score += 10;
-            showFeedback(1, true);
-        } else {
-            showFeedback(1, false);
-        }
+    <input type="checkbox" id="Jackson"><label for="Jackson"> A. Jackson</label>
+    <input type="checkbox" id="Franklin"><label for="Franklin"> B. Franklin</label>
+    <input type="checkbox" id="Jefferson"><label for="Jefferson"> T. Jefferson</label>
+    <input type="checkbox" id="Roosevelt"><label for="Roosevelt"> T. Roosevelt</label>
 
-        // Q6 (Dropdown)
-        if (document.getElementById("q6").value === "Florida") score += 10;
+    <div id="q3Feedback" class="feedback-msg"></div>
+</div>
 
-        // Q7 (Text)
-        if (document.getElementById("q7").value.toLowerCase().trim() === "rhode island") score += 10;
+<!-- Q4 -->
+<div class="quiz-card">
+    <h3><span id="markImg4"></span> What is the smallest US State?</h3>
+    <div id="q4Choices"></div>
+    <div id="q4Feedback" class="feedback-msg"></div>
+</div>
 
-        // Q8 (Number)
-        if (document.getElementById("q8").value == 5) score += 10;
+<!-- Q5 -->
+<div class="quiz-card">
+    <h3><span id="markImg5"></span> True or False: Alaska is the largest state.</h3>
+    <input type="radio" name="q5" id="q5t" value="true"><label for="q5t"> True</label>
+    <input type="radio" name="q5" id="q5f" value="false"><label for="q5f"> False</label>
+    <div id="q5Feedback" class="feedback-msg"></div>
+</div>
 
-        // Q9 (Checkbox - Needs both Oregon & Washington, no New York)
-        const q9a = document.getElementById("q9a").checked;
-        const q9b = document.getElementById("q9b").checked;
-        const q9c = document.getElementById("q9c").checked;
-        if (q9a && q9b && !q9c) score += 10;
+<!-- Q6 -->
+<div class="quiz-card">
+    <h3><span id="markImg6"></span> How many states are in the Union?</h3>
+    <input type="number" id="q6" class="form-control w-25 custom-input">
+    <div id="q6Feedback" class="feedback-msg"></div>
+</div>
 
-        // Q10 (Range)
-        if (document.getElementById("q10").value == 5) score += 10;
+<!-- Q7 -->
+<div class="quiz-card">
+    <h3><span id="markImg7"></span> How many Great Lakes are there?</h3>
+    <input type="range" id="q7" min="1" max="10" oninput="v7.innerText = this.value">
+    <p>Selection: <span id="v7">5</span></p>
+    <div id="q7Feedback" class="feedback-msg"></div>
+</div>
 
-        // (Note: Add logic for Q2-Q5 to reach 100 pts)
-        // Hardcoding placeholder points for demo purposes to reach a potential 100
-        score += 40; 
+<!-- Q8 -->
+<div class="quiz-card">
+    <h3><span id="markImg8"></span> Select the color White:</h3>
+    <input type="color" id="q8">
+    <div id="q8Feedback" class="feedback-msg"></div>
+</div>
 
-        // --- Final Updates ---
+<!-- Q9 -->
+<div class="quiz-card">
+    <h3><span id="markImg9"></span> Select July 4th:</h3>
+    <input type="date" id="q9">
+    <div id="q9Feedback" class="feedback-msg"></div>
+</div>
 
-        // Update Web Storage
-        let attempts = parseInt(localStorage.getItem("geoQuizAttempts") || 0);
-        localStorage.setItem("geoQuizAttempts", attempts + 1);
+<!-- Q10 -->
+<div class="quiz-card">
+    <h3><span id="markImg10"></span> The "Sunshine State" is:</h3>
+    <select id="q10">
+        <option value="">Select</option>
+        <option value="FL">Florida</option>
+        <option value="CA">California</option>
+    </select>
+    <div id="q10Feedback" class="feedback-msg"></div>
+</div>
 
-        // Display Score
-        document.getElementById("finalScoreDisplay").innerText = `Total Score: ${score}/100`;
+<div class="p-5">
+    <div id="validationFdbk" class="text-danger"></div>
 
-        // Congratulatory Message (Rubric Requirement)
-        if (score > 80) {
-            document.getElementById("congrats").classList.remove("d-none");
-        }
+    <button class="btn btn-primary btn-lg">Submit Quiz</button>
 
-        window.scrollTo(0, document.body.scrollHeight);
-    }
+    <h2 id="totalScore"></h2>
+    <div id="congratsMessage" class="d-none"></div>
+</div>
 
-    function showFeedback(qNum, isCorrect) {
-        document.querySelector(`#feedback${qNum} .correct-text`).style.display = isCorrect ? "inline" : "none";
-        document.querySelector(`#feedback${qNum} .incorrect-text`).style.display = isCorrect ? "none" : "inline";
-        document.getElementById(`img1-${isCorrect ? 'c' : 'i'}`).style.display = "inline";
-    }
-</script>
+</main>
 
+<script src="js/script.js"></script>
 </body>
 </html>
