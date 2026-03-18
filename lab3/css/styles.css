@@ -1,1 +1,172 @@
+/**************************************************/
+/* 🌊 1. GLOBAL STYLING                           */
+/**************************************************/
+body {
+    background: linear-gradient(180deg, #EAF9FB 0%, #DFF6F9 100%);
+    font-family: 'Inter', sans-serif;
+    color: #2F5D62;
+}
 
+/**************************************************/
+/* 🌊 2. HEADER                                  */
+/**************************************************/
+.quiz-header {
+    background: linear-gradient(135deg, #A8E6EC 0%, #6ED3CF 100%);
+    padding: 70px 0;
+    color: #1B4D52;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.main-title {
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 3px solid rgba(255,255,255,0.7);
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+/**************************************************/
+/* 🌊 3. QUIZ CARDS                              */
+/**************************************************/
+.quiz-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(174, 229, 233, 0.6);
+    box-shadow: 0 10px 25px rgba(0, 120, 140, 0.05);
+    transition: all 0.3s ease;
+
+    text-align: center;
+}
+
+.quiz-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0, 120, 140, 0.08);
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+}
+
+/**************************************************/
+/* 🌊 4. INPUTS                                  */
+/**************************************************/
+.custom-input,
+.form-select,
+.form-control {
+    border-radius: 12px;
+    border: 2px solid #D0EEF2;
+    background-color: #F7FDFF;
+    transition: all 0.25s ease;
+}
+
+.quiz-card input,
+.quiz-card select {
+    display: block;
+    margin: 10px auto;
+}
+
+.quiz-card input[type="radio"],
+.quiz-card input[type="checkbox"] {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/**************************************************/
+/* 🌊 5. RANGE SLIDER                            */
+/**************************************************/
+input[type="range"] {
+    accent-color: #6ED3CF;
+}
+
+/**************************************************/
+/* 🌊 6. FEEDBACK COLORS                         */
+/**************************************************/
+.bg-success {
+    background-color: #CFF5E7 !important;
+    color: #1E6F5C !important;
+}
+
+.bg-danger {
+    background-color: #FFE3E3 !important;
+    color: #A94442 !important;
+}
+
+.text-success {
+    color: #1E6F5C !important;
+    font-weight: bold;
+}
+
+.text-danger {
+    color: #C0392B !important;
+    font-weight: bold;
+}
+
+.feedback-msg {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/**************************************************/
+/* 🌊 7. BUTTON                                  */
+/**************************************************/
+.btn-aqua-submit {
+    background: linear-gradient(135deg, #6ED3CF, #48C6EF);
+    color: white;
+    border-radius: 50px;
+    font-weight: 700;
+    padding: 14px 40px;
+    border: none;
+    transition: all 0.25s ease;
+}
+
+.btn-aqua-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(72, 198, 239, 0.3);
+}
+
+/**************************************************/
+/* 🌊 8. SCORE + ATTEMPTS                        */
+/**************************************************/
+#totalScore {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+#totalAttempts {
+    background: rgba(0,0,0,0.15) !important;
+    backdrop-filter: blur(5px);
+}
+
+/**************************************************/
+/* 🌊 9. CONGRATS MESSAGE                        */
+/**************************************************/
+#congratsMessage {
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/**************************************************/
+/* 🌊 10. Q4 OPTIONS FIX                         */
+/**************************************************/
+#q4Choices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.q4-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
