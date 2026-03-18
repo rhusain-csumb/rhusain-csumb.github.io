@@ -20,14 +20,12 @@
 
 <main class="container mt-5">
 
-<!-- Q1 -->
 <div class="quiz-card">
     <h3><span id="markImg1"></span> What is the capital of California?</h3>
     <input type="text" id="q1" class="form-control custom-input">
     <div id="q1Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q2 -->
 <div class="quiz-card">
     <h3><span id="markImg2"></span> What is the longest river?</h3>
     <select id="q2" class="form-select custom-input">
@@ -40,26 +38,25 @@
     <div id="q2Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q3 -->
 <div class="quiz-card">
     <h3><span id="markImg3"></span> What presidents are carved into mount Rushmore?</h3>
 
-    <input type="checkbox" id="Jackson"><label for="Jackson"> A. Jackson</label>
-    <input type="checkbox" id="Franklin"><label for="Franklin"> B. Franklin</label>
-    <input type="checkbox" id="Jefferson"><label for="Jefferson"> T. Jefferson</label>
-    <input type="checkbox" id="Roosevelt"><label for="Roosevelt"> T. Roosevelt</label>
+    <div class="checkbox-group">
+        <input type="checkbox" id="Jackson"><label for="Jackson">A. Jackson</label>
+        <input type="checkbox" id="Franklin"><label for="Franklin">B. Franklin</label>
+        <input type="checkbox" id="Jefferson"><label for="Jefferson">T. Jefferson</label>
+        <input type="checkbox" id="Roosevelt"><label for="Roosevelt">T. Roosevelt</label>
+    </div>
 
     <div id="q3Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q4 -->
 <div class="quiz-card">
     <h3><span id="markImg4"></span> What is the smallest US State?</h3>
     <div id="q4Choices"></div>
     <div id="q4Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q5 -->
 <div class="quiz-card">
     <h3><span id="markImg5"></span> True or False: Alaska is the largest state.</h3>
     <input type="radio" name="q5" id="q5t" value="true"><label for="q5t"> True</label>
@@ -67,14 +64,12 @@
     <div id="q5Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q6 -->
 <div class="quiz-card">
     <h3><span id="markImg6"></span> How many states are in the Union?</h3>
-    <input type="number" id="q6" class="form-control w-25 custom-input">
+    <input type="number" id="q6" class="form-control custom-input">
     <div id="q6Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q7 -->
 <div class="quiz-card">
     <h3><span id="markImg7"></span> How many Great Lakes are there?</h3>
     <input type="range" id="q7" min="1" max="10" oninput="v7.innerText = this.value">
@@ -82,24 +77,21 @@
     <div id="q7Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q8 -->
 <div class="quiz-card">
     <h3><span id="markImg8"></span> Select the color White:</h3>
     <input type="color" id="q8">
     <div id="q8Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q9 -->
 <div class="quiz-card">
     <h3><span id="markImg9"></span> Select July 4th:</h3>
     <input type="date" id="q9">
     <div id="q9Feedback" class="feedback-msg"></div>
 </div>
 
-<!-- Q10 -->
 <div class="quiz-card">
     <h3><span id="markImg10"></span> The "Sunshine State" is:</h3>
-    <select id="q10">
+    <select id="q10" class="form-select custom-input">
         <option value="">Select</option>
         <option value="FL">Florida</option>
         <option value="CA">California</option>
@@ -109,9 +101,7 @@
 
 <div class="p-5">
     <div id="validationFdbk" class="text-danger"></div>
-
     <button class="btn btn-primary btn-lg">Submit Quiz</button>
-
     <h2 id="totalScore"></h2>
     <div id="congratsMessage" class="d-none"></div>
 </div>
