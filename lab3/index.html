@@ -7,92 +7,93 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Sign Up</h1>
+  <h1>Sign Up Form</h1>
 
-    <form id="signupForm" action="welcome.html">
-      <div class="form-row">
+  <form id="signupForm" action="welcome.html">
+    <fieldset>
+      <legend>Sign Up</legend>
+
+      <div class="row">
         <label for="fName">First Name:</label>
         <input type="text" id="fName" name="fName">
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <label for="lName">Last Name:</label>
         <input type="text" id="lName" name="lName">
       </div>
 
-      <div class="form-row">
-        <span class="label-text">Gender:</span>
-        <label class="radio-label">
-          <input type="radio" name="gender" value="m"> Male
-        </label>
-        <label class="radio-label">
-          <input type="radio" name="gender" value="f"> Female
-        </label>
+      <div class="row">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <label for="zip">Zip Code:</label>
         <input type="text" id="zip" name="zip">
-        <span id="zipError" class="error"></span>
+        <span id="zipError"></span>
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <label>City:</label>
         <span id="city"></span>
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <label>Latitude:</label>
         <span id="latitude"></span>
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <label>Longitude:</label>
         <span id="longitude"></span>
       </div>
 
-      <div class="form-row">
+      <div class="spacer"></div>
+
+      <div class="row">
         <label for="state">State:</label>
         <select id="state" name="state">
-          <option value="">Loading states...</option>
-        </select>
-      </div>
-
-      <div class="form-row">
-        <label for="county">Select a County:</label>
-        <select id="county" name="county">
           <option value="">Select One</option>
         </select>
       </div>
 
-      <div class="form-row">
+      <div class="row">
+        <label for="county">Select a County:</label>
+        <select id="county" name="county">
+          <option value="">Select County</option>
+        </select>
+      </div>
+
+      <div class="row">
         <label for="username">Desired Username:</label>
         <input type="text" id="username" name="username">
         <span id="usernameError"></span>
       </div>
 
-      <div class="form-row">
+      <div class="spacer small"></div>
+
+      <div class="row">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password">
         <span id="suggestedPwd"></span>
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <label for="passwordAgain">Type Password Again:</label>
         <input type="password" id="passwordAgain" name="passwordAgain">
       </div>
 
-      <div class="form-row">
-        <label></label>
-        <span id="passwordError" class="error"></span>
+      <div class="row button-row">
+        <input type="submit" value="Sign up!">
       </div>
 
-      <div class="form-row submit-row">
-        <input type="submit" value="Sign Up!">
+      <div class="messages">
+        <div id="formError"></div>
+        <div id="passwordError"></div>
       </div>
-    </form>
-  </div>
+    </fieldset>
+  </form>
 
   <script src="js/script.js"></script>
 </body>
