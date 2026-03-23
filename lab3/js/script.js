@@ -1,96 +1,176 @@
-var attempts = parseInt(localStorage.getItem("total_attempts")) || 0;
-var score = 0;
+let usernameAvailable = false;
 
-document.querySelector("#totalAttempts").innerHTML = `Total Attempts: ${attempts}`;
-document.querySelector("button").addEventListener("click", gradeQuiz);
+// Event listeners
+document.querySelector("#zip").addEventListener("change", displayCity);
+document.querySelector("#state").addEventListener("change", displayCounties);
+document.querySelector("#username").addEventListener("input", checkUsername);
+document.querySelector("#password").addEventListener("click", getSuggestedPassword);
+document.querySelector("#signupForm").addEventListener("submit", validateForm);
 
-displayQ4Choices();
+// Load all states when page loads
+getStates();
 
-function displayQ4Choices() {
-    let q4Array = ["Maine", "Rhode Island", "Maryland", "Delaware"];
-    q4Array = _.shuffle(q4Array);
+async function displayCity() {
+  const zip = document.querySelector("#zip").value.trim();
+  const zipError = document.querySelector("#zipError");
 
-    let html = "";
-    q4Array.forEach(choice => {
-        html += `
-        <div class="q4-option">
-            <input type="radio" name="q4" id="${choice}" value="${choice}">
-            <label for="${choice}">${choice}</label>
-        </div>`;
-    });
+  if (zip === "") {
+    clearZipFields();
+    zipError.textContent = "";
+    return;
+  }
 
-    document.querySelector("#q4Choices").innerHTML = html;
-}
+  const url = `https://csumb.space/api/cityInfoAPI.php?zip=${zip}`;
 
-function rightAnswer(i) {
-    document.querySelector(`#markImg${i}`).innerHTML = "<img src='img/checkmark.png'>";
-    let f = document.querySelector(`#q${i}Feedback`);
-    f.innerHTML = "Correct!";
-    f.className = "feedback-msg bg-success";
-    score += 10;
-}
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
-function wrongAnswer(i) {
-    document.querySelector(`#markImg${i}`).innerHTML = "<img src='img/xmark.png'>";
-    let f = document.querySelector(`#q${i}Feedback`);
-    f.innerHTML = "Incorrect!";
-    f.className = "feedback-msg bg-danger";
-}
-
-function gradeQuiz() {
-    score = 0;
-
-    if (document.querySelector("#q1").value == "") {
-        document.querySelector("#validationFdbk").innerHTML = "Question 1 required!";
-        return;
+    if (!data || data === false) {
+      clearZipFields();
+      zipError.textContent = "Zip code not found";
+      zipError.className = "error";
+      return;
     }
 
-    document.querySelector("#validationFdbk").innerHTML = "";
+    zipError.textContent = "";
+    document.querySelector("#city").textContent = data.city;
+    document.querySelector("#latitude").textContent = data.latitude;
+    document.querySelector("#longitude").textContent = data.longitude;
+  } catch (error) {
+    clearZipFields();
+    zipError.textContent = "Zip code not found";
+    zipError.className = "error";
+  }
+}
 
-    if (document.querySelector("#q1").value.toLowerCase().trim() == "sacramento") rightAnswer(1); else wrongAnswer(1);
+function clearZipFields() {
+  document.querySelector("#city").textContent = "";
+  document.querySelector("#latitude").textContent = "";
+  document.querySelector("#longitude").textContent = "";
+}
 
-    let q2 = document.querySelector("#q2").value;
-    if (q2 === "missouri") rightAnswer(2); else wrongAnswer(2);
+async function displayCounties() {
+  const state = document.querySelector("#state").value;
+  const county = document.querySelector("#county");
 
-    if (!document.querySelector("#Jackson").checked &&
-        !document.querySelector("#Franklin").checked &&
-        document.querySelector("#Jefferson").checked &&
-        document.querySelector("#Roosevelt").checked)
-        rightAnswer(3);
-    else wrongAnswer(3);
+  if (state === "") {
+    county.innerHTML = '<option value="">Select One</option>';
+    return;
+  }
 
-    let q4 = document.querySelector("input[name=q4]:checked");
-    if (q4 && q4.value == "Rhode Island") rightAnswer(4); else wrongAnswer(4);
+  const url = `https://csumb.space/api/countyListAPI.php?state=${state}`;
 
-    let q5 = document.querySelector("input[name=q5]:checked");
-    if (q5 && q5.value == "true") rightAnswer(5); else wrongAnswer(5);
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
-    if (document.querySelector("#q6").value == 50) rightAnswer(6); else wrongAnswer(6);
-    if (document.querySelector("#q7").value == 5) rightAnswer(7); else wrongAnswer(7);
-    if (document.querySelector("#q8").value.toLowerCase() == "#ffffff") rightAnswer(8); else wrongAnswer(8);
+    county.innerHTML = '<option value="">Select One</option>';
 
-    let q9 = document.querySelector("#q9").value;
-    if (q9.endsWith("-07-04")) rightAnswer(9); else wrongAnswer(9);
+    for (let i of data) {
+      county.innerHTML += `<option value="${i.county}">${i.county}</option>`;
+    }
+  } catch (error) {
+    county.innerHTML = '<option value="">Select One</option>';
+  }
+}
 
-    if (document.querySelector("#q10").value == "FL") rightAnswer(10); else wrongAnswer(10);
+async function checkUsername() {
+  const username = document.querySelector("#username").value.trim();
+  const msg = document.querySelector("#usernameError");
 
-    document.querySelector("#totalScore").innerHTML = `Score: ${score}/100`;
+  if (username === "") {
+    msg.textContent = "";
+    msg.className = "";
+    usernameAvailable = false;
+    return;
+  }
 
-    let msg = document.querySelector("#congratsMessage");
+  const url = `https://csumb.space/api/usernamesAPI.php?username=${username}`;
 
-    if (score > 80) {
-        msg.innerHTML = "🎉 Congratulations! You scored above 80!";
-        msg.className = "alert";
-        msg.style.background = "#e6f9f0";
-        msg.style.color = "#198754";
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.available) {
+      msg.textContent = "Username available";
+      msg.className = "success";
+      usernameAvailable = true;
     } else {
-        msg.innerHTML = "❌ Your score is 80 or below.";
-        msg.className = "alert";
-        msg.style.background = "#ffe5e5";
-        msg.style.color = "#dc3545";
+      msg.textContent = "Username unavailable";
+      msg.className = "error";
+      usernameAvailable = false;
     }
+  } catch (error) {
+    msg.textContent = "Unable to check username";
+    msg.className = "error";
+    usernameAvailable = false;
+  }
+}
 
-    attempts++;
-    localStorage.setItem("total_attempts", attempts);
-    document.querySelector("#totalAttempts").innerHTML = `Total Attempts: ${attempts}`;
+async function getSuggestedPassword() {
+  const url = "https://csumb.space/api/suggestedPassword.php?length=8";
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    document.querySelector("#suggestedPwd").textContent = `Suggested: ${data.password}`;
+  } catch (error) {
+    document.querySelector("#suggestedPwd").textContent = "";
+  }
+}
+
+async function getStates() {
+  const url = "https://csumb.space/api/allStatesAPI.php";
+  const stateMenu = document.querySelector("#state");
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    stateMenu.innerHTML = '<option value="">Select One</option>';
+
+    for (let i of data) {
+      stateMenu.innerHTML += `<option value="${i.usps.toLowerCase()}">${i.state}</option>`;
+    }
+  } catch (error) {
+    stateMenu.innerHTML = '<option value="">Could not load states</option>';
+  }
+}
+
+function validateForm(e) {
+  let isValid = true;
+
+  const username = document.querySelector("#username").value.trim();
+  const password = document.querySelector("#password").value;
+  const passwordAgain = document.querySelector("#passwordAgain").value;
+
+  const usernameError = document.querySelector("#usernameError");
+  const passwordError = document.querySelector("#passwordError");
+
+  passwordError.textContent = "";
+
+  if (username.length === 0) {
+    usernameError.textContent = "Username Required!";
+    usernameError.className = "error";
+    isValid = false;
+  } else if (!usernameAvailable) {
+    usernameError.textContent = "Username unavailable";
+    usernameError.className = "error";
+    isValid = false;
+  }
+
+  if (password.length < 6) {
+    passwordError.textContent = "Password must be at least 6 characters";
+    passwordError.className = "error";
+    isValid = false;
+  } else if (password !== passwordAgain) {
+    passwordError.textContent = "Passwords do not match";
+    passwordError.className = "error";
+    isValid = false;
+  }
+
+  if (!isValid) {
+    e.preventDefault();
+  }
 }
