@@ -1,26 +1,25 @@
 let usernameAvailable = false;
 
-// Event listeners
 document.querySelector("#zip").addEventListener("change", displayCity);
 document.querySelector("#state").addEventListener("change", displayCounties);
 document.querySelector("#username").addEventListener("input", checkUsername);
 document.querySelector("#password").addEventListener("click", getSuggestedPassword);
 document.querySelector("#signupForm").addEventListener("submit", validateForm);
 
-// Load all states when page loads
+// load all states immediately when page loads
 getStates();
 
 async function displayCity() {
-  const zip = document.querySelector("#zip").value.trim();
+  const zipCode = document.querySelector("#zip").value.trim();
   const zipError = document.querySelector("#zipError");
 
-  if (zip === "") {
+  if (zipCode === "") {
     clearZipFields();
     zipError.textContent = "";
     return;
   }
 
-  const url = `https://csumb.space/api/cityInfoAPI.php?zip=${zip}`;
+  const url = `https://csumb.space/api/cityInfoAPI.php?zip=${zipCode}`;
 
   try {
     const response = await fetch(url);
@@ -34,6 +33,8 @@ async function displayCity() {
     }
 
     zipError.textContent = "";
+    zipError.className = "";
+
     document.querySelector("#city").textContent = data.city;
     document.querySelector("#latitude").textContent = data.latitude;
     document.querySelector("#longitude").textContent = data.longitude;
@@ -50,12 +51,36 @@ function clearZipFields() {
   document.querySelector("#longitude").textContent = "";
 }
 
+async function getStates() {
+  const stateMenu = document.querySelector("#state");
+  const url = "https://csumb.space/api/allStatesAPI.php";
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    stateMenu.innerHTML = `<option value="">Select One</option>`;
+
+    for (let i of data) {
+      // this lab needs the two-letter abbreviation as the value
+      const abbr = (i.usps || i.abbreviation || "").toLowerCase();
+      const stateName = i.state || i.name || "";
+
+      if (abbr && stateName) {
+        stateMenu.innerHTML += `<option value="${abbr}">${stateName}</option>`;
+      }
+    }
+  } catch (error) {
+    stateMenu.innerHTML = `<option value="">Could not load states</option>`;
+  }
+}
+
 async function displayCounties() {
   const state = document.querySelector("#state").value;
-  const county = document.querySelector("#county");
+  const countyList = document.querySelector("#county");
 
   if (state === "") {
-    county.innerHTML = '<option value="">Select One</option>';
+    countyList.innerHTML = `<option value="">Select County</option>`;
     return;
   }
 
@@ -65,23 +90,31 @@ async function displayCounties() {
     const response = await fetch(url);
     const data = await response.json();
 
-    county.innerHTML = '<option value="">Select One</option>';
+    // reset before appending counties
+    countyList.innerHTML = `<option value="">Select County</option>`;
 
     for (let i of data) {
-      county.innerHTML += `<option value="${i.county}">${i.county}</option>`;
+      countyList.innerHTML += `<option value="${i.county}">${i.county}</option>`;
     }
   } catch (error) {
-    county.innerHTML = '<option value="">Select One</option>';
+    countyList.innerHTML = `<option value="">Select County</option>`;
   }
 }
 
 async function checkUsername() {
   const username = document.querySelector("#username").value.trim();
-  const msg = document.querySelector("#usernameError");
+  const usernameError = document.querySelector("#usernameError");
 
-  if (username === "") {
-    msg.textContent = "";
-    msg.className = "";
+  if (username.length === 0) {
+    usernameError.textContent = "";
+    usernameError.className = "";
+    usernameAvailable = false;
+    return;
+  }
+
+  if (username.length < 3) {
+    usernameError.textContent = "";
+    usernameError.className = "";
     usernameAvailable = false;
     return;
   }
@@ -93,17 +126,17 @@ async function checkUsername() {
     const data = await response.json();
 
     if (data.available) {
-      msg.textContent = "Username available";
-      msg.className = "success";
+      usernameError.textContent = "Available";
+      usernameError.className = "success";
       usernameAvailable = true;
     } else {
-      msg.textContent = "Username unavailable";
-      msg.className = "error";
+      usernameError.textContent = "Not available";
+      usernameError.className = "error";
       usernameAvailable = false;
     }
   } catch (error) {
-    msg.textContent = "Unable to check username";
-    msg.className = "error";
+    usernameError.textContent = "Error checking username";
+    usernameError.className = "error";
     usernameAvailable = false;
   }
 }
@@ -114,27 +147,9 @@ async function getSuggestedPassword() {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    document.querySelector("#suggestedPwd").textContent = `Suggested: ${data.password}`;
+    document.querySelector("#suggestedPwd").textContent = `Suggested Password: ${data.password}`;
   } catch (error) {
     document.querySelector("#suggestedPwd").textContent = "";
-  }
-}
-
-async function getStates() {
-  const url = "https://csumb.space/api/allStatesAPI.php";
-  const stateMenu = document.querySelector("#state");
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    stateMenu.innerHTML = '<option value="">Select One</option>';
-
-    for (let i of data) {
-      stateMenu.innerHTML += `<option value="${i.usps.toLowerCase()}">${i.state}</option>`;
-    }
-  } catch (error) {
-    stateMenu.innerHTML = '<option value="">Could not load states</option>';
   }
 }
 
@@ -145,28 +160,25 @@ function validateForm(e) {
   const password = document.querySelector("#password").value;
   const passwordAgain = document.querySelector("#passwordAgain").value;
 
-  const usernameError = document.querySelector("#usernameError");
+  const formError = document.querySelector("#formError");
   const passwordError = document.querySelector("#passwordError");
 
+  formError.textContent = "";
   passwordError.textContent = "";
 
-  if (username.length === 0) {
-    usernameError.textContent = "Username Required!";
-    usernameError.className = "error";
+  if (username.length < 3) {
+    formError.textContent = "username must have at least three characters";
     isValid = false;
   } else if (!usernameAvailable) {
-    usernameError.textContent = "Username unavailable";
-    usernameError.className = "error";
+    formError.textContent = "username is unavailable";
     isValid = false;
   }
 
   if (password.length < 6) {
-    passwordError.textContent = "Password must be at least 6 characters";
-    passwordError.className = "error";
+    passwordError.textContent = "Password must have at least six characters";
     isValid = false;
   } else if (password !== passwordAgain) {
     passwordError.textContent = "Passwords do not match";
-    passwordError.className = "error";
     isValid = false;
   }
 
