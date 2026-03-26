@@ -1,1 +1,96 @@
+* {
+  box-sizing: border-box;
+}
 
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #102a43, #243b53);
+}
+
+.page {
+  padding: 30px;
+}
+
+.hero {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+}
+
+.search-panel,
+.results-panel {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #2f80ed;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: gray;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+}
+
+.card-content {
+  padding: 10px;
+}
