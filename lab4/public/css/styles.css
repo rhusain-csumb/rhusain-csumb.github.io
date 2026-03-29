@@ -1,1 +1,96 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0b1020;
+  color: #f4f7fb;
+}
 
+header {
+  background: #11182d;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #2d3b66;
+}
+
+header h1 {
+  margin: 0 0 15px 0;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  background: #24345f;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background: #3b4f8d;
+}
+
+main {
+  padding: 20px;
+}
+
+.hero {
+  min-height: 70vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 700px;
+}
+
+.content-card {
+  background: #151d35;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.planet-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.planet-image img,
+.nasa-image {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.planet-details p {
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #c6d2ff;
+}
+
+@media (max-width: 800px) {
+  .planet-layout {
+    grid-template-columns: 1fr;
+  }
+}
