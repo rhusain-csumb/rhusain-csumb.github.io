@@ -1,0 +1,24 @@
+<%- include("partials/header.ejs") %>
+
+<section class="content-card">
+  <h2>NASA Picture of the Day</h2>
+
+  <h3><%= apod.title %></h3>
+
+  <% if (apod.media_type === "image") { %>
+    <img class="nasa-image" src="<%= apod.url %>" alt="<%= apod.title %>">
+  <% } else { %>
+    <iframe
+      src="<%= apod.url %>"
+      title="<%= apod.title %>"
+      width="100%"
+      height="500"
+      allowfullscreen>
+    </iframe>
+  <% } %>
+
+  <p><strong>Date:</strong> <%= apod.date %></p>
+  <p><strong>Explanation:</strong> <%= apod.explanation %></p>
+</section>
+
+<%- include("partials/footer.ejs") %>

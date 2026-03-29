@@ -1,0 +1,29 @@
+<%- include("partials/header.ejs") %>
+
+<section class="content-card">
+  <h2><%= planetName %></h2>
+
+  <div class="planet-layout">
+    <div class="planet-image">
+      <img src="<%= planetInfo.image %>" alt="<%= planetName %>">
+    </div>
+
+    <div class="planet-details">
+      <p><strong>Description:</strong> <%= planetInfo.description %></p>
+      <p><strong>Distance from Sun:</strong> <%= planetInfo.distanceFromSun %></p>
+      <p><strong>Year Length:</strong> <%= planetInfo.yearLength %></p>
+      <p><strong>Radius:</strong> <%= planetInfo.radius %></p>
+      <p><strong>One Earth Day:</strong> <%= planetInfo.oneEarthDay %></p>
+      <p><strong>Number of Moons:</strong> <%= planetInfo.moons %></p>
+
+      <% if (planetInfo.websiteLink) { %>
+        <p>
+          <strong>More Info:</strong>
+          <a href="<%= planetInfo.websiteLink %>" target="_blank">Official Link</a>
+        </p>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include("partials/footer.ejs") %>
