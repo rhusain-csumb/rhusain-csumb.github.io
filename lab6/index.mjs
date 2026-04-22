@@ -8,19 +8,15 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || "127.0.0.1",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "usa321321",
-  database: process.env.DB_NAME || "CST336_DB",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   port: Number(process.env.DB_PORT || 3306),
   connectionLimit: 10,
-  ...(process.env.DB_HOST
-    ? {
-        ssl: {
-          rejectUnauthorized: false
-        }
-      }
-    : {})
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // HOME / SEARCH PAGE
