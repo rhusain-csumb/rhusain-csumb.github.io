@@ -8,12 +8,15 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const pool = mysql.createPool({
-  host: "127.0.0.1",
-  user: "root",
-  password: "usa321321",
-  database: "CST336_DB",
-  port: 3306,
-  connectionLimit: 10
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: Number(process.env.DB_PORT || 3306),
+  connectionLimit: 10,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 app.get("/", async (req, res) => {
